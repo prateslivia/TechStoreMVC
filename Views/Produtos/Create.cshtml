@@ -1,43 +1,59 @@
-@* Passo 03 - Criar as Views *@
-@* Se Estou na View(Index) de Produtos, qual sera a model
-que devo usar????????*@
-@model List<TechStoreMVC.Models.Produto>
+	@model TechStoreMVC.Models.Produto
 
-    @{
-        ViewData["Title"] = "Produtos";
-   }
+@{
+    ViewData["Title"] = "Cadastrar produto";
+}
 
-<h1>
-    Lista de Produtos
-</h1>
-<table class="table table-striped">
-    <thead>
-        @*Cabeçalho da tabela*@
-        <tr>
-            <th>Id</th>
-            <th>Nome</th>
-            <th>Preco</th>
-            <th>Estoque</th>
-        </tr>
-    </thead>
-    <tbody>
-        @* Imagine que a cada novo produto voce tivesse que repetir isso
-        toda a vez, seriam linhas sem fim. Por isso, usamoso foreach.
-        
-        O Foreach repete enquanto houver produtos existentes e, se
-        existir, eles serão exibidos para ti nessa tela.*@
-        @foreach(var produto in Model)
-        {
-            <tr>
-            <td>@produto.Id</td>
-            <td>@produto.Nome</td>
-            <td>R$ @produto.Preco.ToString("F2")</td>
-            <td>@produto.Estoque</td>
-            <td> 
-                <button class="btn btn-primary">Detalhes</button>
-            </td>
-            </tr>
-        }
-    </tbody>
+<h1>Cadastrar produto</h1>
 
-</table>
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly"
+         class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Nome"
+               class="form-label"></label>
+
+        <input asp-for="Nome"
+               class="form-control" />
+
+        <span asp-validation-for="Nome"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Preco"
+               class="form-label"></label>
+
+        <input asp-for="Preco"
+               class="form-control" />
+
+        <span asp-validation-for="Preco"
+              class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Estoque"
+               class="form-label"></label>
+
+        <input asp-for="Estoque"
+               class="form-control" />
+
+        <span asp-validation-for="Estoque"
+              class="text-danger"></span>
+    </div>
+
+    <button type="submit"
+            class="btn btn-success">
+        Cadastrar
+    </button>
+
+    <a asp-action="Index"
+       class="btn btn-secondary">
+        Voltar
+    </a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
